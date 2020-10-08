@@ -1,0 +1,24 @@
+.e-cd span:after{
+  content: '\1F4C0';
+}
+
+.e-book span:after{
+  content: '\1F4C4';
+}
+
+.e-music span:after{
+  content: '\1F3B5';
+}
+
+.e-management span:after{
+  content: '\1F4C8';
+}
+
+.e-instrument span:after{
+  content: '\1F3B9';
+}
+
+
+.e-win span:after{
+  content: '\1F3C6';
+}

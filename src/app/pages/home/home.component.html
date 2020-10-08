@@ -1,0 +1,116 @@
+<div class="vh-100 w3-black">
+  <app-navbar class="w3-fixed w3-top"></app-navbar>
+  <div class="w3-display-container" id="home">
+    <app-slider class="slide" [class.w3-hide]="" [src]="'assets/fake-24.jpg'" [text]="'listen now'" ></app-slider>
+    <app-slider class="slide" [class.w3-hide]="true" [src]="'assets/4am-kent.jpg'" [text]="'listen now'" ></app-slider>
+    <app-slider class="slide" [class.w3-hide]="true" [src]="'assets/dollar-kent.jpg'" [text]="'listen now'"></app-slider>
+    <app-slider class="slide" [class.w3-hide]="true" [src]="'assets/phases-evoke.jpg'" [text]="'listen now'"></app-slider>
+    <app-slider class="slide" [class.w3-hide]="true" [src]="'assets/money-jillz.jpg'" [text]="'listen now'"></app-slider>
+  </div>
+  <div class="vh-50" id="artists">
+    <div class="w3-container">
+      <div class="-w3-content w3-padding">
+        <h2 class="pre w3-center"><b>ARTIST SpotLight</b></h2>
+        <!--        accordion-->
+        <div class="w3-container">
+          <div class="accordion w3-dropdown-click w3-black w3-col s12 m6 l6" *ngFor="let a of artistList;index as i">
+            <button class="w3-button w3-col s12" (click)="show(i)">
+              <img src="{{a.image}}" alt="blank spaces" class="profile">
+              <h4 class="w3-text-big face">{{a.name}}</h4></button>
+            <div class="w3-dropdown-content w3-bar w3-bar-block w3-black w3-animate-top" [class.w3-show]="visibility[i]">
+              <div class="w3-bar-item"><p *ngFor="let p of a.profile">{{p.value}}</p></div>
+              <div class="w3-bar-item"><button class="w3-btn w3-dark-green w3-hover-green">Book Now</button><button class="w3-btn w3-red w3-hover-green">Listen Now</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="w3-container w3-hide">
+          <h3 class="pre w3-center">Featured Artists</h3>
+          <div class="w3-button w3-col s6 m3 m3">
+            <img src="/assets/ano-profile.png" alt="" class="w3-image profile">
+            <h5>Reason</h5>
+          </div>
+          <div class="w3-button w3-col s6 m3 m3">
+            <img src="/assets/reason-profile.png" alt="" class="w3-image profile">
+            <h5>Reason</h5>
+          </div>
+          <div class="w3-button w3-col s6 m3 m3">
+            <img src="/assets/ano-profile.png" alt="" class="w3-image profile">
+            <h5>Reason</h5>
+          </div>
+          <div class="w3-button w3-col s6 m3 m3">
+            <img src="/assets/ano-profile.png" alt="" class="w3-image profile">
+            <h5>Reason</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vh-50" id="about">
+    <div class="w3-container">
+      <div class="-w3-content w3-padding">
+        <h2 class="pre w3-center"><b>ABOUT</b></h2>
+        <div class="w3-center w3-content w3-container w3-margin-top w3-text-line-space">
+          Blank Spaces is a young and vibrant record label that features a
+          diverse pool of artists. <br><br>
+          Our role is to identify and partner up with various producers
+          to ensure we work on a wide array of projects and this has
+          helped maintain quality music being delivered in a timely fashion
+          to our fans/stakeholders worldwide. <br><br>
+          We are in the business of developing and creating the African
+          sound, redefining the relationship between the artist and the
+          management space by partnering up with the artists’ individual
+          brands and by growing them outside of their musical talents
+          and services.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vh-50" id="services">
+    <div class="w3-container">
+      <div class="-w3-content w3-padding">
+        <h2 class="pre w3-center"><b>SERVICES</b></h2>
+        <div class="w3-center w3-content w3-container w3-margin-top face w3-text-line-space">
+          <div>
+            <p class="e-music"><span></span> <br class="w3-hide-large w3-hide-medium"> Music creation </p>
+            <p class="e-book"><span></span> <br class="w3-hide-large w3-hide-medium"> Publishing </p>
+            <p class="e-cd"><span></span> <br class="w3-hide-large w3-hide-medium"> Digital distribution </p>
+            <p class="e-management"><span></span> <br class="w3-hide-large w3-hide-medium"> Artist management</p>
+            <p class="e-win"><span></span> <br class="w3-hide-large w3-hide-medium"> Artist Development </p>
+            <p class="e-instrument"><span></span> <br class="w3-hide-large w3-hide-medium"> Band services </p>
+            <p class="e-music">  Creative Agency in partnership with Scout Studios</p>
+            <div>  Our auxiliary services on offer include Events Management. This grants us entry into a
+              space which allows our artists to tap into different distribution and marketing spheres.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vh-75 w3-white" id="videos">
+    <div class="w3-container">
+      <div class="-w3-content w3-padding">
+        <h2 class="pre w3-center"><b>VIDEOS</b></h2>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="w3-modal">
+  <div class="">
+    <div class="w3-modal-content ">
+      <header class="w3-container w3-teal">
+      <span class="w3-button w3-display-topright">&times;</span>
+        <h2>Modal Header</h2>
+      </header>
+
+      <div class="w3-container">
+        <p>Some text..</p>
+        <p>Some text..</p>
+      </div>
+
+      <footer class="w3-container w3-teal">
+        <p>Modal Footer</p>
+      </footer>
+    </div>
+  </div>
+</div>

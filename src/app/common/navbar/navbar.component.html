@@ -1,0 +1,39 @@
+<nav class="w3-fixed w3-bar nav-text bg-nav">
+  <a class="w3-bar-item w3-show-inline-block" href="#about">
+    <img src="assets/blankspaces-icon.png" alt="" class="w3-image w3-bar-item ">
+  </a>
+  <div class="w3-bar-item w3-right">
+    <div class="w3-dropdown-click w3-mobile" >
+      <button class="w3-btn w3-nav-btn w3-black w3-hide-large w3-hide-medium" (click)="toggleShow($event)"  >
+        <span [class.w3-hide]="isShowing">&equiv;</span>
+        <span [class.w3-hide]="!isShowing">&times;</span></button>
+      <div class="w3-dropdown-content w3-bar-block w3-black w3-animate-right" [class.w3-show]="isShowing" (click)="toggleShow($event)">
+        <a class="w3-bar-item w3-button w3-hover-red" href="#home" >HOME</a>
+        <a class="w3-bar-item w3-button w3-hover-orange" href="#artists" >ARTISTS</a>
+        <a class="w3-bar-item w3-button w3-hover-green" href="#about" >ABOUT</a>
+        <a href="#services" class="w3-bar-item w3-button w3-hover-red">SERVICES</a>
+        <div class="w3-dropdown-hover w3-black w3-mobile">
+          <button class="w3-button w3-hover-green"><span></span>GALLERY</button>
+          <div class="w3-dropdown-content w3-black">
+            <a class="w3-bar-item w3-button w3-hover-orange" href="#videos" >&nbsp; VIDEOS</a>
+            <a class="w3-bar-item w3-button w3-hover-red" href="#videos" >&nbsp; IMAGES</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="w3-bar w3-hide-small w3-padding-16">
+      <a class="w3-bar-item w3-hover-text-green" href="#home"><b>HOME</b></a>
+      <a class="w3-bar-item w3-hover-text-yellow" href="#artists"><b>ARTISTS</b></a>
+      <a class="w3-bar-item w3-hover-text-red" href="#about"><b>ABOUT</b></a>
+      <div class="w3-dropdown-hover w3-bar-block w3-mobile">
+        <button class="w3-button w3-hover-text-green"><span></span> <b>GALLERY</b></button>
+        <div class="w3-dropdown-content w3-animate-bottom w3-transparent">
+          <a class="w3-bar-item w3-text-white w3-transparent w3-hover-text-yellow " href="#videos" >&nbsp; VIDEOS</a>
+          <a class="w3-bar-item w3-text-white w3-transparent w3-hover-text-red " href="#videos" >&nbsp; IMAGES</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
