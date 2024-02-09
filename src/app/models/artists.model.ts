@@ -5,4 +5,5 @@ export class Artists {
   profile: Paragraph[];
   bookPath: string;
   image: string;
+  link: string;
 }

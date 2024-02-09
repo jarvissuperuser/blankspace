@@ -1,0 +1,22 @@
+<div class="w3-modal player" [class.w3-show]="show">
+  <div class="">
+    <div class="w3-modal-content w3-border w3-border-grey doc">
+      <header class="w3-container w3-black">
+        <span class="w3-button w3-display-topright" (click)="toggleShowing()">&times;</span>
+        <h2 class="doc">Player</h2>
+      </header>
+
+      <div class="w3-container w3-black">
+        <p></p>
+        <div class="w3-col s12 m8 l8 offset-2">
+          <youtube-player id="mod" [videoId]="vidId" [playerVars]="playerVars" ></youtube-player>
+        </div>
+        <p></p>
+      </div>
+
+      <footer class="w3-container w3-black">
+        <p >youtube footage</p>
+      </footer>
+    </div>
+  </div>
+</div>

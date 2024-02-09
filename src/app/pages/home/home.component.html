@@ -1,54 +1,63 @@
-<div class="vh-100 w3-black">
+<div class="vh-100 w3-black doc">
   <app-navbar class="w3-fixed w3-top"></app-navbar>
   <div class="w3-display-container" id="home">
-    <app-slider class="slide" [class.w3-hide]="" [src]="'assets/fake-24.jpg'" [text]="'listen now'" ></app-slider>
-    <app-slider class="slide" [class.w3-hide]="true" [src]="'assets/4am-kent.jpg'" [text]="'listen now'" ></app-slider>
-    <app-slider class="slide" [class.w3-hide]="true" [src]="'assets/dollar-kent.jpg'" [text]="'listen now'"></app-slider>
-    <app-slider class="slide" [class.w3-hide]="true" [src]="'assets/phases-evoke.jpg'" [text]="'listen now'"></app-slider>
-    <app-slider class="slide" [class.w3-hide]="true" [src]="'assets/money-jillz.jpg'" [text]="'listen now'"></app-slider>
+    <app-slider *ngFor="let slide of slides" class="slide w3-animate-left"
+                [class.w3-hide]="slide.hide"
+                [src]="slide.asset"
+                text="listen now"
+                [listenTo]="slide.listen"
+                (listenNow)="handleListenNow($event)"
+    ></app-slider>
   </div>
   <div class="vh-50" id="artists">
     <div class="w3-container">
       <div class="-w3-content w3-padding">
-        <h2 class="pre w3-center"><b>ARTIST SpotLight</b></h2>
+        <p>&nbsp;</p>
+        <h2 class="w3-center doc"><b>ARTIST SpotLight</b></h2>
+        <p>&nbsp;</p>
         <!--        accordion-->
         <div class="w3-container">
           <div class="accordion w3-dropdown-click w3-black w3-col s12 m6 l6" *ngFor="let a of artistList;index as i">
             <button class="w3-button w3-col s12" (click)="show(i)">
               <img src="{{a.image}}" alt="blank spaces" class="profile">
-              <h4 class="w3-text-big face">{{a.name}}</h4></button>
+              <h4 class="w3-text-big doc">{{a.name}}</h4></button>
             <div class="w3-dropdown-content w3-bar w3-bar-block w3-black w3-animate-top" [class.w3-show]="visibility[i]">
               <div class="w3-bar-item"><p *ngFor="let p of a.profile">{{p.value}}</p></div>
-              <div class="w3-bar-item"><button class="w3-btn w3-dark-green w3-hover-green">Book Now</button><button class="w3-btn w3-red w3-hover-green">Listen Now</button></div>
+              <div class="w3-bar-item"><button class="w3-btn w3-dark-green w3-hover-green" (click)="bookNow(a)" >Book Now</button><button class="w3-btn w3-red w3-hover-green" (click)="openNewTabTo(a);">Listen Now</button></div>
             </div>
           </div>
         </div>
         <div class="w3-container w3-hide">
-          <h3 class="pre w3-center">Featured Artists</h3>
-          <div class="w3-button w3-col s6 m3 m3">
-            <img src="/assets/ano-profile.png" alt="" class="w3-image profile">
+          <p>&nbsp;</p>
+          <h3 class="w3-center doc">Featured Artists</h3>
+          <p>&nbsp;</p>
+          <div class="w3-button w3-col s6 m3 m3 w3-hover-black">
+            <img src="/assets/blankspaces-icon.png" alt="" class="w3-image profile">
+            <h5>Venom</h5>
+          </div>
+          <div class="w3-button w3-col s6 m3 m3 w3-hover-black">
+            <img src="/assets/blankspaces-icon.png" alt="" class="w3-image profile">
             <h5>Reason</h5>
           </div>
-          <div class="w3-button w3-col s6 m3 m3">
-            <img src="/assets/reason-profile.png" alt="" class="w3-image profile">
-            <h5>Reason</h5>
+          <div class="w3-button w3-col s6 m3 m3 w3-hover-black">
+            <img src="/assets/blankspaces-icon.png" alt="" class="w3-image profile">
+            <h5>Rowlene</h5>
           </div>
-          <div class="w3-button w3-col s6 m3 m3">
-            <img src="/assets/ano-profile.png" alt="" class="w3-image profile">
-            <h5>Reason</h5>
-          </div>
-          <div class="w3-button w3-col s6 m3 m3">
-            <img src="/assets/ano-profile.png" alt="" class="w3-image profile">
-            <h5>Reason</h5>
+          <div class="w3-button w3-col s6 m3 m3 w3-hover-black">
+            <img src="/assets/blankspaces-icon.png" alt="" class="w3-image profile">
+            <h5>Jiggy</h5>
           </div>
         </div>
+        <p>&nbsp;</p>
       </div>
     </div>
   </div>
-  <div class="vh-50" id="about">
+  <div class="vh-50 w3-white" id="about">
     <div class="w3-container">
       <div class="-w3-content w3-padding">
-        <h2 class="pre w3-center"><b>ABOUT</b></h2>
+        <p>&nbsp;</p>
+        <h2 class="w3-center doc"><b>ABOUT</b></h2>
+        <p>&nbsp;</p>
         <div class="w3-center w3-content w3-container w3-margin-top w3-text-line-space">
           Blank Spaces is a young and vibrant record label that features a
           diverse pool of artists. <br><br>
@@ -65,19 +74,21 @@
       </div>
     </div>
   </div>
-  <div class="vh-50" id="services">
+  <div class="vh-50 " id="services">
     <div class="w3-container">
       <div class="-w3-content w3-padding">
-        <h2 class="pre w3-center"><b>SERVICES</b></h2>
-        <div class="w3-center w3-content w3-container w3-margin-top face w3-text-line-space">
+        <p>&nbsp;</p>
+        <h2 class="w3-center doc"><b>SERVICES</b></h2>
+        <p>&nbsp;</p>
+        <div class="w3-center w3-content w3-container w3-margin-top w3-text-line-space">
           <div>
-            <p class="e-music"><span></span> <br class="w3-hide-large w3-hide-medium"> Music creation </p>
-            <p class="e-book"><span></span> <br class="w3-hide-large w3-hide-medium"> Publishing </p>
-            <p class="e-cd"><span></span> <br class="w3-hide-large w3-hide-medium"> Digital distribution </p>
-            <p class="e-management"><span></span> <br class="w3-hide-large w3-hide-medium"> Artist management</p>
-            <p class="e-win"><span></span> <br class="w3-hide-large w3-hide-medium"> Artist Development </p>
-            <p class="e-instrument"><span></span> <br class="w3-hide-large w3-hide-medium"> Band services </p>
-            <p class="e-music">  Creative Agency in partnership with Scout Studios</p>
+            <p class="e-music"><span></span> <br class=""> Music creation </p>
+            <p class="e-book"><span></span> <br class=""> Publishing </p>
+            <p class="e-cd"><span></span> <br class=""> Digital distribution </p>
+            <p class="e-management"><span></span> <br class=""> Artist management</p>
+            <p class="e-win"><span></span> <br class=""> Artist Development </p>
+            <p class="e-instrument"><span></span> <br class=""> Band services </p>
+            <p class="e-music">  Creative Agency in partnership with <a target="_blank" href="https://nkatekomasinga.co.za"><b>Scout Studios</b></a></p>
             <div>  Our auxiliary services on offer include Events Management. This grants us entry into a
               space which allows our artists to tap into different distribution and marketing spheres.
             </div>
@@ -85,32 +96,103 @@
         </div>
       </div>
     </div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
   </div>
   <div class="vh-75 w3-white" id="videos">
     <div class="w3-container">
-      <div class="-w3-content w3-padding">
-        <h2 class="pre w3-center"><b>VIDEOS</b></h2>
-        <div></div>
+      <div class="w3-content w3-padding">
+        <p>&nbsp;</p>
+        <h2 class="w3-center doc"><b>VIDEOS</b></h2>
+        <div class="w3-row w3-content">
+          <p>&nbsp;</p>
+          <div class="w3-col s12 l6 m6 w3-padding">
+            <app-thumbnailer [src]="'assets/luz-control.gif'" [setup]="{type:'vid', link: 'Gu-PpJpL7cc'}" (launch)="handleListenNow($event)"></app-thumbnailer>
+          </div>
+          <div class="w3-col s12 l6 m6 w3-padding">
+            <app-thumbnailer src="assets/24.gif"  [setup]="{type:'vid', link: 'Nh7ySyOCTkI'}" (launch)="handleListenNow($event)"></app-thumbnailer>
+          </div>
+          <div class="w3-col s12 l6 m6 w3-padding">
+            <app-thumbnailer src="assets/money-calling.gif" [setup]="{type:'vid', link: 'xBvIy2U_5dQ'}" (launch)="handleListenNow($event)"></app-thumbnailer>
+          </div>
+          <div class="w3-col s12 l6 m6 w3-padding">
+            <app-thumbnailer src="assets/dollar.gif"[setup]="{type:'vid', link: 'QBuPliuFNK4'}" (launch)="handleListenNow($event)"></app-thumbnailer>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w3-container">
+      <div class="w3-content w3-padding">
+        <p>&nbsp;</p>
+        <h2 class="w3-center doc"><b>IMAGES</b></h2>
+        <div class="w3-container">
+          <div class="w3-row">
+            <div class="w3-col s6 m6 l4 w3-padding">
+              <img src="assets/app-evoke-0.jpg" alt="" class="w3-image w3-img-hover-zoom">
+            </div>
+            <div class="w3-col s6 m6 l4 w3-padding">
+              <img src="assets/app-ano-1.jpg" alt="" class="w3-image w3-img-hover-zoom">
+            </div>
+            <div class="w3-col s6 m6 l4 w3-padding">
+              <img src="assets/app-jillz-0.jpg" alt="" class="w3-image w3-img-hover-zoom">
+            </div>
+            <div class="w3-col s6 m6 l4 w3-padding">
+              <img src="assets/app-steve-0.jpg" alt="" class="w3-image w3-img-hover-zoom">
+            </div>
+            <div class="w3-col s6 m6 l4 w3-padding">
+              <img src="assets/app-jillz-1.jpg" alt="" class="w3-image w3-img-hover-zoom">
+            </div>
+            <div class="w3-col s6 m6 l4 w3-padding">
+              <img src="assets/app-evoke-1.jpg" alt="" class="w3-image w3-img-hover-zoom">
+            </div>
+            <div class="w3-col s6 m6 l4 w3-padding">
+              <img src="assets/app-steve-1.jpg" alt="" class="w3-image w3-img-hover-zoom">
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div class="footer">
+    <div class="w3-container pre">
+      <div>&copy; 2020 BlankSpaces</div>
+    </div>
+  </div>
 </div>
-<div class="w3-modal">
+<div class="w3-modal" [class.w3-show]="bookingForm">
   <div class="">
-    <div class="w3-modal-content ">
-      <header class="w3-container w3-teal">
-      <span class="w3-button w3-display-topright">&times;</span>
-        <h2>Modal Header</h2>
+    <div class="w3-modal-content w3-border w3-border-grey doc">
+      <header class="w3-container w3-black">
+      <span class="w3-button w3-display-topright" (click)="closeBookingForm()">&times;</span>
+        <h2 class="doc">Request A booking For {{artistNameForm}}</h2>
       </header>
 
-      <div class="w3-container">
-        <p>Some text..</p>
-        <p>Some text..</p>
+      <div class="w3-container w3-black">
+        <p></p>
+        <form (submit)="$event.preventDefault()" class="w3-centered">
+          <div class="w3-col s12 l8 m8 offset-2">
+            <input type="email" class="w3-input w3-animate-input w3-black"
+                   placeholder=" Enter Email here" name="email" [(ngModel)]="bookEmail.email">
+            <input type="text" class="w3-input w3-animate-input w3-black"
+                   placeholder="Enter Your Name" name="name" [(ngModel)]="bookEmail.name" >
+            <input type="text" class="w3-input w3-animate-input w3-black"
+                   placeholder="Event Date" name="eventDate" [(ngModel)]="bookEmail.eventDate">
+            <input type="text" class="w3-input w3-animate-input w3-black"
+                   placeholder="Message" name="message" [(ngModel)]="bookEmail.message">
+            <input type="submit" class="w3-button w3-green"
+                   value="Request A Booking" (click)="sendEmail()">
+          </div>
+        </form>
+        <p></p>
       </div>
 
-      <footer class="w3-container w3-teal">
-        <p>Modal Footer</p>
+      <footer class="w3-container w3-black">
+        <p> </p>
       </footer>
     </div>
   </div>
 </div>
+
+<app-vid [show]="showPlayer" [vidId]="vidRender" (isShowing)="handleModalClose($event)"></app-vid>

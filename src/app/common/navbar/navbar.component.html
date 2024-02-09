@@ -4,9 +4,9 @@
   </a>
   <div class="w3-bar-item w3-right">
     <div class="w3-dropdown-click w3-mobile" >
-      <button class="w3-btn w3-nav-btn w3-black w3-hide-large w3-hide-medium" (click)="toggleShow($event)"  >
+      <div class="w3-btn w3-nav-btn w3-black w3-hide-large w3-hide-medium" (click)="toggleShow($event)"  >
         <span [class.w3-hide]="isShowing">&equiv;</span>
-        <span [class.w3-hide]="!isShowing">&times;</span></button>
+        <span [class.w3-hide]="!isShowing">&times;</span></div>
       <div class="w3-dropdown-content w3-bar-block w3-black w3-animate-right" [class.w3-show]="isShowing" (click)="toggleShow($event)">
         <a class="w3-bar-item w3-button w3-hover-red" href="#home" >HOME</a>
         <a class="w3-bar-item w3-button w3-hover-orange" href="#artists" >ARTISTS</a>
@@ -19,7 +19,6 @@
             <a class="w3-bar-item w3-button w3-hover-red" href="#videos" >&nbsp; IMAGES</a>
           </div>
         </div>
-
       </div>
     </div>
 

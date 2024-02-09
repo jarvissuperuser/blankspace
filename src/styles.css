@@ -212,12 +212,14 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-border-white,.w3-hover-border-white:hover{border-color:#fff!important}
 .w3-border-black,.w3-hover-border-black:hover{border-color:#000!important}
 .w3-border-grey,.w3-hover-border-grey:hover,.w3-border-gray,.w3-hover-border-gray:hover{border-color:#bbb!important}
+@font-face {font-family: 'Agency';src:url("/assets/agency-fb.ttf")  }
 @font-face{font-family: "pxx";src: url("/assets/Romanesco-Regular.ttf"); }
 @font-face{font-family: "play";src: url("/assets/BalooTammudu2-Regular.ttf"); }
 @font-face{font-family: "food";src: url("/assets/Tangerine-Bold.ttf");}
 @font-face{font-family: "SmoothText";src: url("/assets/MonsieurLaDoulaise-Regular.ttf");}
 .rom{font-family: pxx;}
 .face{font-family: play;}
+.doc{font-family: Agency, Arial;}
 .food{font-family: food;}
 .smooth{font-family: SmoothText;}
 .pre{font-family: monospace;}
@@ -276,6 +278,12 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   padding: 10px;
 }
 
+div .w3-img-hover-zoom{
+  transition: transform 0.7s;
+}
+div .w3-img-hover-zoom:hover{
+  transform: scale(1.2);
+}
 
 .bg-nav{
   background-color: rgba(3,3,3,0.6);

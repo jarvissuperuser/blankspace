@@ -1,26 +1,39 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Artists} from '../../models/artists.model';
 import {Paragraph} from '../../models/paragraph.model';
 import {gsap} from 'gsap';
 import {TweenMax} from 'gsap/gsap-core';
+import {ModalService} from '../../services/modal.service';
+import {Email} from '../../models/email.model';
+import {EmailsService} from '../../services/emails.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterContentInit {
   artistList: Artists[];
   visibility = [];
   intervals: any;
   counter = 1;
   slideCount = 0;
+  slides: any[];
+  showPlayer = false;
+  vidRender: any;
+  bookingForm = false;
+  artistNameForm = '';
+  bookEmail: Email;
 
-  constructor() { }
+  constructor(
+    private modal: ModalService,
+    private email: EmailsService
+  ) { }
 
   ngOnInit(): void {
    this.artistList = this.artistLoader();
-   this.animateSlides();
+   this.slides  = this.slideShow;
+   this.bookEmail = new Email();
   }
   artistLoader(): Artists[] {
     const artists = [
@@ -41,7 +54,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           'and has the rare gift of self-producing elaborate, lush, ' +
           'maximalist beats.',
         bookPath: '/stephenNeoKent',
-        image: '/assets/steve-profile.png'
+        image: '/assets/steve-profile.png',
+        link: 'https://distrokid.com/hyperfollow/stephenofkent1/4am-feat-reason'
       },
       {
         name: 'Fake Ano',
@@ -73,7 +87,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           'Johannesburg, South Africa and how this has shaped his ' +
           'view.',
         bookPath: '/path',
-        image: '/assets/ano-profile.png'
+        image: '/assets/ano-profile.png',
+        link: 'https://distrokid.com/hyperfollow/fakeano/24'
       },
       {
         name: 'Jillz',
@@ -105,7 +120,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           'the radio charts and yet, this is only a taste of what this' +
           'Young Talented individual will to offer to world.',
         bookPath: '/path',
-        image: '/assets/jillz-profile.png'
+        image: '/assets/jillz-profile.png',
+        link: 'https://distrokid.com/hyperfollow/jillz/money-calling-feat-vegasxcesar'
       },
       {
         name: 'Evoke',
@@ -135,7 +151,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           'worked with artists such as Reason and Lucille Slade. \n' +
           'The future looks bright for this young producer.\n',
         bookPath: '/path',
-        image: '/assets/evoke-profile.png'
+        image: '/assets/evoke-profile.png',
+        link: 'https://distrokid.com/hyperfollow/evoke2/just-hold-on-feat-manana'
       },
     ];
     const artistes = [];
@@ -145,10 +162,45 @@ export class HomeComponent implements OnInit, OnDestroy {
       artist.profile = this.processPara(a.profile);
       artist.bookPath = a.bookPath;
       artist.image = a.image;
+      artist.link = a.link;
       artistes.push(artist);
       this.visibility.push(false);
     });
     return artistes;
+  }
+  get slideShow(): any[] {
+    return [
+      {
+        asset: 'assets/fake-24.jpg',
+        btnText: 'listen now',
+        listen: {type: 'link', link: 'https://distrokid.com/hyperfollow/fakeano/24'},
+        hide: false
+      },
+      {
+        asset: 'assets/4am-kent.jpg',
+        btnText: 'listen now',
+        listen: {type: 'link', link: 'https://distrokid.com/hyperfollow/stephenofkent1/4am-feat-reason'},
+        hide: true
+      },
+      {
+        asset: 'assets/dollar-kent.jpg',
+        btnText: 'listen now',
+        listen: {type: 'link', link: 'https://fanlink.to/dTSQ'},
+        hide: true
+      },
+      {
+        asset: 'assets/phases-evoke.jpg',
+        btnText: 'listen now',
+        listen: {type: 'link', link: 'https://distrokid.com/hyperfollow/evoke2/just-hold-on-feat-manana'},
+        hide: true
+      },
+      {
+        asset: 'assets/money-jillz.jpg',
+        btnText: 'listen now',
+        listen: {type: 'link', link: 'https://distrokid.com/hyperfollow/jillz/money-calling-feat-vegasxcesar'},
+        hide: true
+      },
+    ];
   }
   processPara(profile: string): Paragraph[] {
     const paragraphs = profile.split('\n');
@@ -167,22 +219,80 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.visibility[i] = true;
   }
   animateSlides(): void {
-     this.intervals = setInterval(() => {
-       const slides = document.querySelectorAll('app-slider');
-       slides.forEach(slide => {
-         if (!slide.classList.contains('w3-hide')) {
-           slide.classList.add('w3-hide');
-           // slide.classList.add('w')
-         }
-       });
-       this.slideCount = slides.length;
-       if (this.counter >= this.slideCount){
-         this.counter = 0;
+    const { doc, slideShow } = this;
+    this.intervals = setInterval(() => {
+      this.slides.forEach(slide => {
+       if (this.showPlayer) {
+         this.stopInterval();
        }
-       slides[this.counter].classList.add('w3-animate-left');
-       slides[this.counter].classList.remove('w3-hide');
-       this.counter++;
-     }, 5000);
+       slide.hide = true;
+      });
+      this.slideCount = this.slides.length;
+      if (this.counter >= this.slideCount){
+       this.counter = 0;
+      }
+      this.slides[this.counter].hide = false;
+      this.counter++;
+    }, 5000);
+  }
+
+  get getOrigin(): string {
+    return window.location.origin.toString();
+  }
+
+  get doc(): Document {
+    return document;
+  }
+
+  stopInterval(): void {
+    clearInterval(this.intervals);
+  }
+  handleListenNow(event): void {
+    switch (event.res.type) {
+      case 'vid':
+        this.modal.sendMessage({show: true});
+        this.stopInterval();
+        this.vidRender = event.res.link;
+        break;
+      case 'link':
+        this.openNewTabTo(event.res.link);
+        break;
+      default:
+    }
+  }
+  openNewTabTo(link): void {
+    const a = this.doc.createElement('a');
+    a.href = link.hasOwnProperty('link') ? link.link : link;
+    a.target = '_blank';
+    a.click();
+  }
+  handleModalClose(event): void {
+    this.animateSlides();
+  }
+  bookNow(artist: Artists): void {
+    this.bookingForm = true;
+    this.artistNameForm = artist.name;
+  }
+  closeBookingForm(): void {
+    this.bookingForm = false;
+  }
+  sendEmail(): void {
+    this.bookEmail.artist = this.artistNameForm;
+    console.log(this.bookEmail);
+    this.email.sendEmail(this.bookEmail);
+    this.closeBookingForm();
+  }
+
+  get playerVars(): YT.PlayerVars {
+    return { autoplay: 0, loop: 1,
+      controls: 0, modestbranding: 1, origin: 'http://localhost:4200'};
+  }
+  ngAfterContentInit(): void {
+    if (!this.showPlayer) {
+      this.animateSlides();
+    } else {
+      this.stopInterval();
+    }
   }
 
   ngOnDestroy(): void {

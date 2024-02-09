@@ -11,8 +11,8 @@ a, a:hover {
   text-decoration-line: none;
 }
 .w3-dropdown-hover button span:after {
-  content: ' \22B3\00A0' ;
+  content: ' \25B6\00A0' ;
 }
 .w3-dropdown-hover button:hover span:after {
-  content: '\2207\00A0'
+  content: '\25BC\00A0'
 }
